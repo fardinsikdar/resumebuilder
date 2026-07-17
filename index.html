@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Professional Resume Builder & Fintech Hub</title>
+    <!-- Importing high-impact Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Vibrant Modern Dashboard Palette */
+            --primary: #0f172a;
+            --primary-accent: #6366f1;
+            --gradient-start: #4f46e5;
+            --gradient-end: #9333ea;
+            --bg-light: #f1f5f9;
+            --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            --border: #e2e8f0;
+            --error: #ef4444;
+            
+            /* Dynamic Theme Variables for Resume Rendering */
+            --theme-accent: #2563eb;
+            --theme-base: #ffffff;
+            --theme-text-on-accent: #ffffff;
+            --theme-text-on-base: #0f172a;
+            --theme-sidebar-bg: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: #334155;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-page {
+            display: none;
+            width: 100%;
+        }
+
+        .app-page.active {
+            display: block;
+        }
+
+        /* Nav Header Links */
+        .sub-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.5rem;
+            margin: 0 auto 2rem auto;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 0.8rem 1.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .sub-nav a {
+            color: #4f46e5;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .sub-nav a:hover {
+            color: #9333ea;
+        }
+
+        /* ================= LANDING PAGE ================= */
+        .landing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, #dbeafe, #f3e8ff);
+            color: #4f46e5;
+            padding: 0.75rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border: 2px solid #bfdbfe;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+        }
+
+        .landing-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #1e1b4b, #4f46e5, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .landing-header p {
+            font-size: 1.4rem;
+            color: #475569;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #c7d2fe;
+            box-shadow: 0 20px 30px -5px rgba(79, 70, 229, 0.12);
+        }
+
+        .feature-card:nth-child(1) .feature-icon { background: #eff6ff; color: #2563eb; }
+        .feature-card:nth-child(2) .feature-icon { background: #ecfdf5; color: #059669; }
+        .feature-card:nth-child(3) .feature-icon { background: #fff7ed; color: #ea580c; }
+        .feature-card:nth-child(4) .feature-icon { background: #f5f3ff; color: #7c3aed; }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1.25rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .btn-large {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            font-size: 1.3rem;
+            padding: 1.3rem 3.5rem;
+            border-radius: 18px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-large:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -5px rgba(79, 70, 229, 0.5);
+        }
+
+        /* ================= PALETTE SELECTOR (SMALL & PROFESSIONAL STYLE) ================= */
+        .selector-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .selector-header p {
+            font-size: 1rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .templates-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .template-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            width: 210px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-card:hover {
+            border-color: var(--primary-accent);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .template-preview-box {
+            height: 90px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .preview-blue { background: #f8fafc; border: 3px solid #1e3a8a; }
+        .preview-emerald { background: #f0fdf4; border: 3px solid #065f46; }
+        .preview-charcoal { background: #f9fafb; border: 3px solid #1f2937; }
+        .preview-purple { background: #f5f3ff; border: 3px solid #5b21b6; }
+        .preview-burgundy { background: #fff5f5; border: 3px solid #851414; }
+
+        .dummy-line { height: 5px; background: #cbd5e1; width: 90%; border-radius: 2px; }
+        .dummy-line.title { height: 10px; width: 60%; }
+        .preview-blue .dummy-line.title { background: #1e3a8a; }
+        .preview-emerald .dummy-line.title { background: #065f46; }
+        .preview-charcoal .dummy-line.title { background: #1f2937; }
+        .preview-purple .dummy-line.title { background: #5b21b6; }
+        .preview-burgundy .dummy-line.title { background: #851414; }
+
+        .template-card h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .template-card p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .btn-select {
+            background: #f8fafc;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            margin-top: auto;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .template-card:hover .btn-select {
+            background: var(--primary-accent);
+            color: white;
+            border-color: var(--primary-accent);
+        }
+
+        /* ================= BUILDER CONFIGURATION WORKSPACE ================= */
+        .builder-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto 2rem auto;
+            background: rgba(255,255,255,0.8);
+            padding: 0.8rem 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .nav-status { font-weight: 700; color: var(--primary-accent); font-size: 1.2rem; }
+        .form-container-centered { max-width: 900px; width: 100%; margin: 0 auto; }
+        
+        .form-side { 
+            background: white; 
+            padding: 3.5rem; 
+            border-radius: 32px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08); 
+            border: 1px solid var(--border); 
+        }
+
+        h2 { font-family: 'Poppins', sans-serif; font-size: 2.3rem; color: var(--primary); margin-bottom: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+        h3 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--border); font-weight: 700; }
+        
+        .section { margin-bottom: 3rem; }
+        .form-group { margin-bottom: 1.5rem; position: relative; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        label { display: block; font-weight: 600; margin-bottom: 0.6rem; font-size: 1rem; color: #334155; }
+        
+        input, textarea, select { 
+            width: 100%; 
+            padding: 1rem; 
+            border: 2px solid var(--border); 
+            border-radius: 12px; 
+            font-size: 1.05rem; 
+            background: white; 
+            color: #0f172a;
+            transition: all 0.2s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        input.field-error, textarea.field-error, select.field-error {
+            border-color: var(--error) !important;
+            background-color: #fef2f2;
+        }
+
+        textarea { height: 110px; resize: vertical; }
+
+        .suggestion-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: none;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-top: 6px;
+        }
+        .suggestion-item {
+            padding: 0.8rem 1.25rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+        .suggestion-item:hover { background: #f8fafc; color: var(--primary-accent); }
+
+        .fresher-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px dashed #bbf7d0;
+        }
+
+        .fresher-toggle-container input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+        .fresher-toggle-container label { margin-bottom: 0; cursor: pointer; font-weight: 700; color: #166534; }
+
+        .dynamic-row { border-left: 5px solid var(--primary-accent); padding: 1.5rem; margin-bottom: 1.5rem; background: #f8fafc; border-radius: 0 16px 16px 0; border: 1px solid var(--border); }
+        
+        button { font-family: inherit; color: white; border: none; padding: 0.8rem 1.8rem; border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.2s; }
+        button:hover { transform: translateY(-1px); }
+        
+        .btn-secondary { background: #e2e8f0; color: #475569; border: 1px solid #cbd5e1; }
+        .btn-secondary:hover { background: #cbd5e1; }
+        .btn-add { background-color: #059669; margin-top: 0.5rem; }
+        .btn-add:hover { background-color: #047857; }
+        
+        .btn-ready-submit { 
+            width: 100%; 
+            padding: 1.2rem; 
+            font-size: 1.2rem; 
+            background: linear-gradient(135deg, #059669, #10b981);
+            margin-top: 1.5rem; 
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(5, 150, 105, 0.25);
+        }
+
+        /* ================= PREMIUM DOWNLOAD PAGE ================= */
+        .download-layout-container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .checkout-side-panel {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            height: fit-content;
+            text-align: center;
+        }
+
+        .price-container {
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .original-price { font-size: 1.8rem; color: #94a3b8; text-decoration: line-through; font-weight: 600; }
+        .offer-price { font-size: 4rem; font-weight: 900; color: #059669; font-family: 'Poppins', sans-serif; }
+
+        .limited-tag {
+            background: #fef2f2;
+            color: #ef4444;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid #fee2e2;
+        }
+
+        .btn-pay { 
+            width: 100%; 
+            padding: 1.2rem; 
+            font-size: 1.2rem; 
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-print { width: 100%; padding: 1.2rem; font-size: 1.2rem; background-color: #0f172a; display: none; border-radius: 14px; }
+
+        .preview-side-locked {
+            background: #cbd5e1;
+            padding: 2rem;
+            border-radius: 24px;
+            display: flex;
+            justify-content: center;
+            height: fit-content;
+        }
+
+        /* Strict A4 Constraints */
+        .resume-preview {
+            background: var(--theme-base);
+            color: var(--theme-text-on-base);
+            width: 210mm;
+            height: 297mm;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        .locked-preview { filter: blur(6px); pointer-events: none; user-select: none; }
+
+        .resume-layout-header {
+            background-color: var(--theme-accent);
+            color: var(--theme-text-on-accent);
+            padding: 20mm 15mm 10mm 15mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resume-header-info h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24pt;
+            font-weight: 800;
+            color: var(--theme-text-on-accent);
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .resume-subtitle { font-size: 9pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; font-weight: 600; }
+
+        .photo-preview-container {
+            width: 85pt;
+            height: 105pt;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid var(--theme-text-on-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+        .photo-preview-container img { width: 100%; height: 100%; object-fit: cover; }
+        #photo-placeholder { font-size: 8pt; font-weight: bold; color: var(--theme-text-on-accent); }
+
+        .resume-lower-layout { display: flex; flex-direction: row; flex-grow: 1; height: calc(100% - 55mm); }
+
+        .resume-panel-left {
+            width: 33%;
+            background-color: var(--theme-sidebar-bg);
+            border-right: 1px solid rgba(0,0,0,0.06);
+            padding: 10mm 8mm;
+        }
+
+        .panel-section { margin-bottom: 18pt; }
+        .panel-section h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--theme-accent);
+            font-size: 9pt;
+            letter-spacing: 1px;
+            margin-bottom: 6pt;
+            border-bottom: 1.5px solid var(--theme-accent);
+            padding-bottom: 2pt;
+            font-weight: 700;
+        }
+        .panel-section p { margin-bottom: 4pt; font-size: 8.5pt; color: #475569; word-break: break-word; }
+
+        .resume-panel-main { width: 67%; padding: 10mm 15mm 10mm 10mm; }
+        .main-section { margin-bottom: 20pt; }
+        .resume-panel-main h3 { font-family: 'Poppins', sans-serif; border-bottom: 1.5px solid rgba(0,0,0,0.08); margin-bottom: 8pt; font-size: 11pt; padding-bottom: 2pt; }
+        .resume-panel-main h3 span { color: var(--theme-accent); }
+
+        .objective-text { text-align: justify; font-size: 9pt; color: #475569; }
+        .edu-table { width: 100%; border-collapse: collapse; margin-top: 4pt; font-size: 8.5pt; }
+        .edu-table th, .edu-table td { border: 1px solid rgba(0,0,0,0.06); padding: 5pt; text-align: left; }
+        .edu-table th { background-color: rgba(0,0,0,0.02); font-weight: bold; }
+
+        .skills-list { margin-left: 12pt; font-size: 8.5pt; color: #475569; }
+        .skills-list li { margin-bottom: 3pt; }
+
+        .resume-item { margin-bottom: 8pt; }
+        .resume-item-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 9pt; }
+        .resume-item-sub { color: #64748b; font-style: italic; font-size: 8.5pt; }
+
+        @media (max-width: 1200px) {
+            .download-layout-container { grid-template-columns: 1fr; }
+            .preview-side-locked { overflow-x: auto; padding: 1rem; }
+        }
+
+        @media print {
+            @page { size: A4; margin: 0mm; }
+            body { background: white; padding: 0; }
+            .app-page { display: none !important; }
+            .app-page#page-download { display: block !important; }
+            .checkout-side-panel, .builder-nav, .sub-nav { display: none !important; }
+            .download-layout-container { display: block; }
+            .preview-side-locked { background: none; padding: 0; width: 100%; }
+            .resume-preview { box-shadow: none; margin: 0; width: 210mm; height: 297mm; filter: none !important; }
+        }
+    </style>
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+</head>
+<body>
+
+    <div style="width: 100%; max-width: 1400px; display: flex; flex-direction: column;">
+        
+        <!-- ================= MODERN SAAS APP SUB-NAV BAR ================= -->
+        <div class="sub-nav">
+            <a href="#" onclick="navigateTo('page-landing')">Home</a>
+            <a href="#" onclick="navigateTo('page-about')">About Us</a>
+            <a href="#" onclick="navigateTo('page-feedback')">Share Feedback</a>
+            <a href="https://wa.me/916000285447?text=Hello!%20I%20want%20to%20inquire%20about%20Digital%20Services%20and%20Fintech%20Consultancy." 
+               target="_blank" 
+               style="color: #25D366; font-weight: 700; display: inline-flex; align-items: center; gap: 0.25rem;">
+               💬 WhatsApp Support
+            </a>
+        </div>
+
+        <!-- ================= PAGE 1: LANDING PAGE ================= -->
+        <div id="page-landing" class="app-page active">
+            <div class="landing-container">
+                <header class="landing-header">
+                    <div class="trust-badge"><span>✓</span> 2 Lakh+ Resumes Generated Successfully</div>
+                    <h1>Create a stunning professional resume in minutes</h1>
+                    <p>Build an elegant, recruiter-approved, and ATS-optimized resume using our high-performance live data compiler engine.</p>
+                </header>
+
+                <section class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Live Real-Time Sync</h3>
+                        <p>Input your parameters into our structured form architecture and watch your document compile seamlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Calibrated Palettes</h3>
+                        <p>Select from 5 professional dual-tone theme profiles. Structural text adjustments ensure maximum visual consistency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Digital Consultancy</h3>
+                        <p>Get expert architectural advice on setting up digital service centers, financial technology networks, and secure digital branding frameworks.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📲</div>
+                        <h3>Instant WhatsApp Connect</h3>
+                        <p>Need custom portals, API integrations, or specialized business tools? Chat directly with our solutions expert instantly.</p>
+                    </div>
+                </section>
+
+                <div class="landing-cta" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                    <button class="btn-large" onclick="navigateTo('page-selector')">Build Your Professional Resume Now &rarr;</button>
+                    
+                    <a href="https://wa.me/916000285447?text=I%20need%20more%20details%20about%20your%20Digital%20Services%20and%20Fintech%20Consultancy." 
+                       target="_blank" 
+                       style="background: #128C7E; color: white; padding: 1rem 2.5rem; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 10px 20px rgba(18, 140, 126, 0.25); transition: transform 0.2s;">
+                       Explore More Digital Services & Consultancy &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 2: PALETTE SELECTOR (SMALL & PROFESSIONAL) ================= -->
+        <div id="page-selector" class="app-page">
+            <div class="selector-header">
+                <h2>Select Your System Theme</h2>
+                <p>Pick a calibrated dual-tone layout preset. Background variables adjust parameters dynamically to keep reading visibility perfect.</p>
+            </div>
+
+            <div class="templates-container">
+                <div class="template-card" onclick="selectTheme('theme-blue', '#1e3a8a', '#ffffff', '#f8fafc')">
+                    <div class="template-preview-box preview-blue">
+                        <div class="dummy-line title"></div>
+                        <div class="dummy-line"></div>
+                    </div>
+                    <h3>Corporate Blue</h3>
+                    <p>Deep Navy elements combined with crisp boundaries. Ideal for corporate profiles.</p>
+                    <button class="btn-select">Select Theme</button>
+                </div>
+
+                <div class="template-card" onclick="selectTheme('theme-emerald', '#065f46', '#ffffff', '#f0fdf4')">
+                    <div class="template-preview-box preview-emerald">
+                        <div class="dummy-line title"></div>
+                        <div class="dummy-line"></div>
+                    </div>
+                    <h3>Emerald Slate</h3>
+                    <p>Modern dark green markers against a clean base grid. Inviting and distinct design.</p>
+                    <button class="btn-select">Select Theme</button>
+                </div>
+
+                <div class="template-card" onclick="selectTheme('theme-charcoal', '#1f2937', '#ffffff', '#f9fafb')">
+                    <div class="template-preview-box preview-charcoal">
+                        <div class="dummy-line title"></div>
+                        <div class="dummy-line"></div>
+                    </div>
+                    <h3>Classic Charcoal</h3>
+                    <p>High-contrast premium setup. Maximum safety score across general software layers.</p>
+                    <button class="btn-select">Select Theme</button>
+                </div>
+
+                <div class="template-card" onclick="selectTheme('theme-purple', '#5b21b6', '#ffffff', '#f5f3ff')">
+                    <div class="template-preview-box preview-purple">
+                        <div class="dummy-line title"></div>
+                        <div class="dummy-line"></div>
+                    </div>
+                    <h3>Deep Purple</h3>
+                    <p>Vibrant design parameters targeted towards tech, engineering, and digital marketing sectors.</p>
+                    <button class="btn-select">Select Theme</button>
+                </div>
+
+                <div class="template-card" onclick="selectTheme('theme-burgundy', '#851414', '#ffffff', '#fff5f5')">
+                    <div class="template-preview-box preview-burgundy">
+                        <div class="dummy-line title"></div>
+                        <div class="dummy-line"></div>
+                    </div>
+                    <h3>Premium Burgundy</h3>
+                    <p>Warm rich accents mixed with subtle cream fields. Elegant and distinguished tone.</p>
+                    <button class="btn-select">Select Theme</button>
+                </div>
+            </div>
+
+            <div class="selector-back" style="text-align: center;">
+                <button class="btn-secondary" onclick="navigateTo('page-landing')">&larr; Back to Home</button>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3: BUILDER WORKSPACE ================= -->
+        <div id="page-builder" class="app-page">
+            <div class="builder-nav">
+                <button class="btn-secondary" onclick="navigateTo('page-selector')">&larr; Change Theme</button>
+                <span class="nav-status">Resume Profile Compiler</span>
+            </div>
+
+            <div class="form-container-centered">
+                <div class="form-side">
+                    <h2>Resume Configuration</h2>
+                    
+                    <div class="section">
+                        <h3>Personal Details</h3>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="input-name" class="required-field" placeholder="John Doe" oninput="removeErrorHighlight(this)">
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Email ID</label>
+                                <input type="email" id="input-email" class="required-field" placeholder="johndoe@example.com" oninput="removeErrorHighlight(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input type="text" id="input-phone" class="required-field" placeholder="+91 98765 43210" oninput="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Photo</label>
+                            <input type="file" id="input-photo" accept="image/*" onchange="previewPhoto(event)">
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Career Objective</h3>
+                        <div class="form-group">
+                            <label>Objective Statement</label>
+                            <textarea id="input-objective" class="required-field" placeholder="Click to choose a suggestion or start typing..." onfocus="handleObjectiveFocus()" oninput="handleObjectiveInput(this)" onblur="handleObjectiveBlur()"></textarea>
+                            <div id="objective-suggestions" class="suggestion-box">
+                                <div class="suggestion-item" onmousedown="selectSuggestion(1)">To secure a challenging role in a progressive organization where I can leverage my technical capabilities, professional skills, and core knowledge to drive operational efficiency and growth.</div>
+                                <div class="suggestion-item" onmousedown="selectSuggestion(2)">Result-oriented professional seeking an entry-level position to apply robust problem-solving, basic computing expertise, and multi-lingual coordination skills in a high-growth business environment.</div>
+                                <div class="suggestion-item" onmousedown="selectSuggestion(3)">Motivated and detail-oriented individual looking to contribute reliable administrative execution, typing precision, and technical aptitude toward achieving strategic organization goals.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Address Matrix</h3>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Village / Town / House No</label>
+                                <input type="text" id="input-villa" class="required-field" placeholder="Street Address" oninput="removeErrorHighlight(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>Post Office</label>
+                                <input type="text" id="input-po" class="required-field" placeholder="P.O." oninput="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Police Station</label>
+                                <input type="text" id="input-ps" class="required-field" placeholder="P.S." oninput="removeErrorHighlight(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>District</label>
+                                <input type="text" id="input-dist" class="required-field" placeholder="District" oninput="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" id="input-state" class="required-field" placeholder="State" oninput="removeErrorHighlight(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>Pin Code</label>
+                                <input type="text" id="input-pin" class="required-field" placeholder="700001" oninput="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Academic Records</h3>
+                        <div id="education-fields">
+                            <div class="dynamic-row">
+                                <div class="form-group"><input type="text" class="edu-degree required-field" placeholder="Degree / Course Specification" oninput="removeErrorHighlight(this)"></div>
+                                <div class="form-group"><input type="text" class="edu-school required-field" placeholder="University / Board / Institution" oninput="removeErrorHighlight(this)"></div>
+                                <div class="grid-2">
+                                    <div class="form-group"><input type="text" class="edu-year required-field" placeholder="Passing Year" oninput="removeErrorHighlight(this)"></div>
+                                    <div class="form-group"><input type="text" class="edu-grade required-field" placeholder="Grade / %" oninput="removeErrorHighlight(this)"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addEducation()">+ Add Record Row</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>Skills Profile</h3>
+                        <div class="form-group">
+                            <label>Core Capabilities (Separate entries using commas)</label>
+                            <input type="text" id="input-skills" class="required-field" placeholder="Management, Coding, Operations" oninput="removeErrorHighlight(this)">
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Experience Data</h3>
+                        <div class="fresher-toggle-container">
+                            <input type="checkbox" id="checkbox-fresher" onchange="toggleFresherMode(this)">
+                            <label for="checkbox-fresher">I am a Fresher (No Professional Experience)</label>
+                        </div>
+                        
+                        <div id="experience-input-wrapper">
+                            <div id="experience-fields">
+                                <div class="dynamic-row">
+                                    <div class="form-group"><input type="text" class="exp-title required-field" placeholder="Designation / Job Role" oninput="removeErrorHighlight(this)"></div>
+                                    <div class="form-group"><input type="text" class="exp-company required-field" placeholder="Company Name" oninput="removeErrorHighlight(this)"></div>
+                                    <div class="form-group"><input type="text" class="exp-date required-field" placeholder="Duration" oninput="removeErrorHighlight(this)"></div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add" onclick="addExperience()">+ Add Experience Block</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Additional Demographics</h3>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Father's Name</label>
+                                <input type="text" id="input-father" class="required-field" placeholder="Father's Name" oninput="removeErrorHighlight(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" id="input-dob" class="required-field" onchange="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="input-gender" class="required-field" onchange="removeErrorHighlight(this)">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nationality</label>
+                                <input type="text" id="input-nationality" class="required-field" placeholder="Indian" oninput="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Marital Status</label>
+                                <select id="input-martial" class="required-field" onchange="removeErrorHighlight(this)">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Unmarried">Unmarried</option>
+                                    <option value="Married">Married</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Languages Known</label>
+                                <input type="text" id="input-languages" class="required-field" placeholder="English, Hindi" oninput="removeErrorHighlight(this)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-ready-submit" onclick="validateFormAndProceed()">Download Your Resume &rarr;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 4: PREMIUM DOWNLOAD PAGE ================= -->
+        <div id="page-download" class="app-page">
+            <div class="builder-nav">
+                <button class="btn-secondary" onclick="navigateTo('page-builder')">&larr; Back to Parameters</button>
+                <span class="nav-status">Security Processing Hub</span>
+            </div>
+            
+            <div class="download-layout-container">
+                <div class="checkout-side-panel">
+                    <h2>Unlock Premium Layout</h2>
+                    <p>Your resume parameters have been parsed successfully. Unlock the system grid instantly to save high-resolution A4 files.</p>
+                    <div class="price-container">
+                        <span class="original-price">₹199</span>
+                        <span class="offer-price">₹9</span>
+                    </div>
+                    <div class="limited-tag">⚠️ Limited Time Offer Activating</div>
+                    <button id="pay-button" class="btn-pay" onclick="payNow()">Pay ₹9 to Download Instantly</button>
+                    <button id="print-button" class="btn-print" onclick="window.print()">Download Print Ready PDF</button>
+                </div>
+
+                <div class="preview-side-locked">
+                    <div id="resume-wrapper" class="resume-preview locked-preview">
+                        <div class="resume-layout-header">
+                            <div class="resume-header-info">
+                                <h1 id="view-name"></h1>
+                                <p class="resume-subtitle">Professional Profile Layout</p>
+                            </div>
+                            <div class="photo-preview-container">
+                                <img id="view-photo" src="" alt="Photo" style="display: none;">
+                                <span id="photo-placeholder">PHOTO CAPTURE</span>
+                            </div>
+                        </div>
+
+                        <div class="resume-lower-layout">
+                            <div class="resume-panel-left">
+                                <div class="panel-section">
+                                    <h4>CONTACT OBJECTS</h4>
+                                    <p id="wrap-email" style="display:none;"><strong>Email:</strong><br><span id="view-email"></span></p>
+                                    <p id="wrap-phone" style="display:none; margin-top: 5pt;"><strong>Phone:</strong><br><span id="view-phone"></span></p>
+                                    <p id="wrap-address" style="display:none; margin-top: 5pt;"><strong>Address:</strong><br><span id="view-address"></span></p>
+                                </div>
+                                <div class="panel-section">
+                                    <h4>CORE CAPABILITIES</h4>
+                                    <ul id="view-skills" class="skills-list"></ul>
+                                </div>
+                                <div class="panel-section">
+                                    <h4>DEMOGRAPHICS</h4>
+                                    <p id="wrap-father" style="display:none;"><strong>Father:</strong> <span id="view-father"></span></p>
+                                    <p id="wrap-dob" style="display:none;"><strong>D.O.B:</strong> <span id="view-dob"></span></p>
+                                    <p id="wrap-gender" style="display:none;"><strong>Gender:</strong> <span id="view-gender"></span></p>
+                                    <p id="wrap-nationality" style="display:none;"><strong>Nationality:</strong> <span id="view-nationality"></span></p>
+                                    <p id="wrap-martial" style="display:none;"><strong>Status:</strong> <span id="view-martial"></span></p>
+                                    <p id="wrap-languages" style="display:none;"><strong>Languages:</strong> <span id="view-languages"></span></p>
+                                </div>
+                            </div>
+
+                            <div class="resume-panel-main">
+                                <div class="main-section">
+                                    <h3><span>CAREER OBJECTIVE</span></h3>
+                                    <p id="view-objective" class="objective-text"></p>
+                                </div>
+                                <div class="main-section">
+                                    <h3><span>ACADEMIC COMPILATION</span></h3>
+                                    <table class="edu-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Parameters</th>
+                                                <th>Institution Scope</th>
+                                                <th>Year</th>
+                                                <th>Metrics</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="view-education"></tbody>
+                                    </table>
+                                </div>
+                                <div class="main-section">
+                                    <h3><span>WORK HISTORY</span></h3>
+                                    <div id="view-experience"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= NEW PAGE: ABOUT US ================= -->
+        <div id="page-about" class="app-page">
+            <div class="builder-nav">
+                <button class="btn-secondary" onclick="navigateTo('page-landing')">&larr; Back to Home</button>
+                <span class="nav-status">Who We Are</span>
+            </div>
+            <div class="form-container-centered">
+                <div class="form-side" style="padding: 3rem; text-align: left;">
+                    <h2>About Our Digital Staging Hub</h2>
+                    <p style="margin-bottom: 1.5rem; color: #475569;">Welcome to our multi-purpose digital transformation suite. While our real-time engine delivers top-tier resume building layouts, we extend deep expertise well beyond simple documents.</p>
+                    
+                    <h3 style="font-size: 1.3rem; margin-top: 2rem;">Digital Service Center Engineering</h3>
+                    <p style="margin-bottom: 1.5rem; color: #475569;">We conceptualize, brand, and layout secure, modern structures for localized operations—architecting the essential foundations for emerging fintech hubs and localized service points.</p>
+                    
+                    <h3 style="font-size: 1.3rem; margin-top: 2rem;">Fintech & Technology Consultancy</h3>
+                    <p style="margin-bottom: 2rem; color: #475569;">From localized business portals to backend transaction workflows and operational API gateways, we optimize business frameworks to scale cleanly without architectural bottlenecks.</p>
+                    
+                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 14px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <strong style="color: var(--primary-accent);">Need custom digital infrastructure?</strong>
+                            <div style="font-size: 0.95rem; color: #64748b;">Get strategic enterprise consultation today.</div>
+                        </div>
+                        <a href="https://wa.me/916000285447?text=Hello,%20I%20am%20interested%20in%20your%20Digital%20Consultancy%20services." target="_blank" style="background: #25D366; color: white; padding: 0.75rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">Contact Consultant</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= NEW PAGE: FEEDBACK FORM ================= -->
+        <div id="page-feedback" class="app-page">
+            <div class="builder-nav">
+                <button class="btn-secondary" onclick="navigateTo('page-landing')">&larr; Back to Home</button>
+                <span class="nav-status">Share Experience</span>
+            </div>
+            <div class="form-container-centered">
+                <div class="form-side" style="padding: 3rem;">
+                    <h2>Platform Feedback Form</h2>
+                    <p style="margin-bottom: 2rem; color: #64748b;">Help us calibrate our real-time resume compiler and digital solutions framework by submitting your experience profile.</p>
+                    
+                    <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="feedback-name" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="feedback-email" required placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Service Area Rated</label>
+                            <select id="feedback-service" required>
+                                <option value="Resume Builder Engine">Resume Builder Engine</option>
+                                <option value="Digital Center Branding">Digital Center Design & Branding</option>
+                                <option value="Fintech Consultancy">Fintech & API Staging Consultancy</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Experience Review & Messages</label>
+                            <textarea id="feedback-message" required placeholder="Write your notes or service queries here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-ready-submit" style="margin-top: 1rem;">Submit Response &rarr;</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let isPaid = false;
+        let selectedThemeName = 'theme-blue';
+
+        // Initializing the Cashfree checkout object targets Sandbox testing mode parameters
+        const cashfree = Cashfree({ mode: "production" });
+
+        function navigateTo(pageId) {
+            document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectTheme(themeName, accentHex, baseHex, sidebarHex) {
+            selectedThemeName = themeName;
+            const root = document.documentElement;
+            root.style.setProperty('--theme-accent', accentHex);
+            root.style.setProperty('--theme-base', baseHex);
+            root.style.setProperty('--theme-sidebar-bg', sidebarHex);
+            
+            if (['theme-charcoal', 'theme-blue', 'theme-burgundy', 'theme-purple'].includes(themeName)) {
+                root.style.setProperty('--theme-text-on-accent', '#ffffff');
+            } else {
+                root.style.setProperty('--theme-text-on-accent', '#0f172a');
+            }
+            navigateTo('page-builder');
+        }
+
+        function toggleFresherMode(checkbox) {
+            const inputWrapper = document.getElementById('experience-input-wrapper');
+            const fields = inputWrapper.querySelectorAll('.required-field');
+            if (checkbox.checked) {
+                inputWrapper.style.opacity = '0.3';
+                inputWrapper.style.pointerEvents = 'none';
+                fields.forEach(f => { f.classList.remove('required-field'); f.classList.remove('field-error'); });
+            } else {
+                inputWrapper.style.opacity = '1';
+                inputWrapper.style.pointerEvents = 'auto';
+                inputWrapper.querySelectorAll('input').forEach(f => f.classList.add('required-field'));
+            }
+        }
+
+        function validateFormAndProceed() {
+            const requiredFields = document.querySelectorAll('.required-field');
+            let hasErrors = false;
+            let firstErrorElement = null;
+
+            requiredFields.forEach(field => {
+                if (!field.value || field.value.trim() === "") {
+                    field.classList.add('field-error');
+                    hasErrors = true;
+                    if (!firstErrorElement) { firstErrorElement = field; }
+                } else {
+                    field.classList.remove('field-error');
+                }
+            });
+
+            if (hasErrors) {
+                alert("Please fill all required inputs highlighted in red.");
+                if (firstErrorElement) firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            buildResumeDataStructure();
+            navigateTo('page-download');
+        }
+
+        function removeErrorHighlight(element) {
+            if (element.value && element.value.trim() !== "") element.classList.remove('field-error');
+        }
+
+        async function payNow() {
+            try {
+                const userEmail = document.getElementById('input-email').value;
+                const userPhone = document.getElementById('input-phone').value;
+
+                const response = await fetch("http://localhost:3000/create-order", { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: userEmail, phone: userPhone })
+                });
+                const data = await response.json();
+                
+                if (!data.payment_session_id) {
+                    alert("Payment session extraction logic failed down standard structural checks.");
+                    return;
+                }
+
+                cashfree.checkout({
+                    paymentSessionId: data.payment_session_id,
+                    redirectTarget: "_modal"
+                }).then((result) => {
+                    if (result.error) {
+                        alert("Window closed: " + result.error.message);
+                    } else {
+                        unlockResume();
+                    }
+                });
+            } catch (error) {
+                alert("Unable to reach transaction processing pipeline nodes.");
+            }
+        }
+
+        function unlockResume() {
+            isPaid = true;
+            document.getElementById('resume-wrapper').classList.remove('locked-preview');
+            document.getElementById('pay-button').style.display = 'none';
+            document.getElementById('print-button').style.display = 'block';
+        }
+
+        function previewPhoto(event) {
+            const input = event.target;
+            const viewPhoto = document.getElementById('view-photo');
+            const placeholder = document.getElementById('photo-placeholder');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    viewPhoto.src = e.target.result;
+                    viewPhoto.style.display = 'block';
+                    placeholder.style.display = 'none';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handleObjectiveFocus() {
+            if (!document.getElementById('input-objective').value.trim()) {
+                document.getElementById('objective-suggestions').style.display = 'block';
+            }
+        }
+
+        function handleObjectiveInput(element) {
+            removeErrorHighlight(element);
+            document.getElementById('objective-suggestions').style.display = element.value.trim() ? 'none' : 'block';
+        }
+
+        function handleObjectiveBlur() {
+            setTimeout(() => { document.getElementById('objective-suggestions').style.display = 'none'; }, 200);
+        }
+
+        function selectSuggestion(index) {
+            const items = document.querySelectorAll('.suggestion-item');
+            const target = document.getElementById('input-objective');
+            target.value = items[index - 1].innerText;
+            target.classList.remove('field-error');
+        }
+
+        function handleFeedbackSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('feedback-name').value;
+            alert(`Thank you, ${name}! Your feedback has been logged successfully.`);
+            document.getElementById('feedbackForm').reset();
+            navigateTo('page-landing');
+        }
+
+        function buildResumeDataStructure() {
+            document.getElementById('view-name').innerText = document.getElementById('input-name').value.trim().toUpperCase();
+            
+            const email = document.getElementById('input-email').value.trim();
+            document.getElementById('view-email').innerText = email;
+            document.getElementById('wrap-email').style.display = email ? 'block' : 'none';
+
+            const phone = document.getElementById('input-phone').value.trim();
+            document.getElementById('view-phone').innerText = phone;
+            document.getElementById('wrap-phone').style.display = phone ? 'block' : 'none';
+
+            const villa = document.getElementById('input-villa').value.trim();
+            const po = document.getElementById('input-po').value.trim();
+            const ps = document.getElementById('input-ps').value.trim();
+            const dist = document.getElementById('input-dist').value.trim();
+            const state = document.getElementById('input-state').value.trim();
+            const pin = document.getElementById('input-pin').value.trim();
+            const addr = `${villa}, PO: ${po}, PS: ${ps}, Dist: ${dist}, ${state} ${pin}`;
+            document.getElementById('view-address').innerText = addr;
+            document.getElementById('wrap-address').style.display = addr ? 'block' : 'none';
+
+            document.getElementById('view-objective').innerText = document.getElementById('input-objective').value.trim();
+
+            const eduRows = document.querySelectorAll('#education-fields .dynamic-row');
+            let eduHTML = '';
+            eduRows.forEach(row => {
+                const degree = row.querySelector('.edu-degree').value.trim();
+                const school = row.querySelector('.edu-school').value.trim();
+                const year = row.querySelector('.edu-year').value.trim();
+                const grade = row.querySelector('.edu-grade').value.trim();
+                eduHTML += `<tr><td><strong>${degree}</strong></td><td>${school}</td><td>${year}</td><td>${grade}</td></tr>`;
+            });
+            document.getElementById('view-education').innerHTML = eduHTML;
+
+            let skillsHTML = '';
+            document.getElementById('input-skills').value.split(',').forEach(sk => {
+                if(sk.trim()) skillsHTML += `<li>${sk.trim()}</li>`;
+            });
+            document.getElementById('view-skills').innerHTML = skillsHTML;
+
+            if (document.getElementById('checkbox-fresher').checked) {
+                document.getElementById('view-experience').innerHTML = '<p style="font-style:italic; color:#64748b;">Entry-Level Profile / Fresher</p>';
+            } else {
+                let expHTML = '';
+                document.querySelectorAll('#experience-fields .dynamic-row').forEach(row => {
+                    const title = row.querySelector('.exp-title').value.trim();
+                    const comp = row.querySelector('.exp-company').value.trim();
+                    const dt = row.querySelector('.exp-date').value.trim();
+                    expHTML += `<div class="resume-item"><div class="resume-item-header"><span>• ${title}</span><span>(${dt})</span></div><div class="resume-item-sub">${comp}</div></div>`;
+                });
+                document.getElementById('view-experience').innerHTML = expHTML;
+            }
+
+            document.getElementById('view-father').innerText = document.getElementById('input-father').value.trim();
+            document.getElementById('wrap-father').style.display = 'block';
+
+            const dob = document.getElementById('input-dob').value.split('-');
+            document.getElementById('view-dob').innerText = dob.length === 3 ? `${dob[2]}/${dob[1]}/${dob[0]}` : '';
+            document.getElementById('wrap-dob').style.display = 'block';
+
+            document.getElementById('view-gender').innerText = document.getElementById('input-gender').value;
+            document.getElementById('wrap-gender').style.display = 'block';
+            document.getElementById('view-nationality').innerText = document.getElementById('input-nationality').value.trim();
+            document.getElementById('wrap-nationality').style.display = 'block';
+            document.getElementById('view-martial').innerText = document.getElementById('input-martial').value;
+            document.getElementById('wrap-martial').style.display = 'block';
+            document.getElementById('view-languages').innerText = document.getElementById('input-languages').value.trim();
+            document.getElementById('wrap-languages').style.display = 'block';
+        }
+
+        function addEducation() {
+            const container = document.getElementById('education-fields');
+            const newRow = document.createElement('div');
+            newRow.className = 'dynamic-row';
+            newRow.innerHTML = `
+                <div class="form-group"><input type="text" class="edu-degree required-field" placeholder="Degree" oninput="removeErrorHighlight(this)"></div>
+                <div class="form-group"><input type="text" class="edu-school required-field" placeholder="Institution" oninput="removeErrorHighlight(this)"></div>
+                <div class="grid-2">
+                    <div class="form-group"><input type="text" class="edu-year required-field" placeholder="Passing Year" oninput="removeErrorHighlight(this)"></div>
+                    <div class="form-group"><input type="text" class="edu-grade required-field" placeholder="Percentage" oninput="removeErrorHighlight(this)"></div>
+                </div>
+            `;
+            container.appendChild(newRow);
+        }
+
+        function addExperience() {
+            const container = document.getElementById('experience-fields');
+            const newRow = document.createElement('div');
+            newRow.className = 'dynamic-row';
+            newRow.innerHTML = `
+                <div class="form-group"><input type="text" class="exp-title required-field" placeholder="Role" oninput="removeErrorHighlight(this)"></div>
+                <div class="form-group"><input type="text" class="exp-company required-field" placeholder="Company Name" oninput="removeErrorHighlight(this)"></div>
+                <div class="form-group"><input type="text" class="exp-date required-field" placeholder="Duration" oninput="removeErrorHighlight(this)"></div>
+            `;
+            container.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>
