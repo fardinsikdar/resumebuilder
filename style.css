@@ -365,3 +365,26 @@ body {
     .resume-preview { box-shadow: none; min-height: auto; }
     .edu-table th { background-color: rgba(0,0,0,0.04) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+@media (max-width: 600px) {
+  /* Make the main container take up the full width of the phone screen */
+  .container, form {
+    width: 90% !important;
+    max-width: 100% !important;
+    padding: 15px !important;
+    margin: 10px auto !important;
+  }
+
+  /* Force side-by-side input fields to stack vertically on small screens */
+  .form-row, .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Ensure all text inputs and buttons span the full width of the viewport */
+  input, select, textarea, button {
+    width: 100% !important;
+    font-size: 16px !important; /* Prevents iOS Safari from auto-zooming when tapping inputs */
+    box-sizing: border-box;
+  }
+}
